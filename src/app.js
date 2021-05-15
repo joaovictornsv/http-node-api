@@ -1,21 +1,23 @@
 const http = require('http');
 const _ = require('url');
 const path = require('path');
-const { getData, addUser, getUserById, overwriteData } = require('./utils');
+const UserController = require('./controllers/UserController');
+
 
 const filePath = path.resolve(__dirname, 'data', 'users.txt');
 
-module.exports = http.createServer(async (req, res) => {
+const userController = new UserController(filePath)
+
+
+const app = http.createServer(async (req, res) => {
   const url = new _.URL('http://localhost:3333'+req.url)
-  
+
   try {
     const route = url.pathname
     if (route == '/') {
       
-      
       res.writeHead(200, { 'content-type': 'application/json'})
       res.write(JSON.stringify({welcome: 'http node api'}))
-      
       
       return res.end();
     }
@@ -25,7 +27,7 @@ module.exports = http.createServer(async (req, res) => {
       const id = url.searchParams.get('id');
 
       if (id) {
-        const userExists = await getUserById(id, filePath);
+        const userExists = await userController.getUserById(id);
 
         if (!userExists) {
           res.writeHead(400, { 'content-type': 'application/json'});
@@ -38,7 +40,7 @@ module.exports = http.createServer(async (req, res) => {
         return res.end();
       }
       
-      const users = await getData(filePath);
+      const users = await userController.getData();
       
       res.writeHead(200, { 'content-type': 'application/json'});
       res.write(JSON.stringify(users));
@@ -60,7 +62,7 @@ module.exports = http.createServer(async (req, res) => {
       }
       
       
-      const userAlreadyExists = await getUserById(id, filePath);
+      const userAlreadyExists = await userController.getUserById(id);
       
       if (userAlreadyExists) {
         res.writeHead(400, { 'content-type': 'application/json'});
@@ -69,7 +71,7 @@ module.exports = http.createServer(async (req, res) => {
       }
       const newUser = { id, name, age, city }
       
-      await addUser(newUser, filePath);
+      await userController.addUser(newUser);
       
       res.writeHead(201, { 'content-type': 'application/json'});
       res.write(JSON.stringify(newUser));
@@ -96,7 +98,7 @@ module.exports = http.createServer(async (req, res) => {
         res.write(JSON.stringify({error: 'No fields to edit provided!'}));
         return res.end();
       }
-      const users = await getData(filePath);
+      const users = await userController.getData();
       
       const userExists = users.find(user => {
         if (user.id == id) {
@@ -124,7 +126,7 @@ module.exports = http.createServer(async (req, res) => {
         return user;
       });
       
-      await overwriteData(filePath, usersUpdated);
+      await userController.overwriteData(usersUpdated);
       
       res.writeHead(200, { 'content-type': 'application/json'});
       throw JSON.stringify({message: 'Data updated'});
@@ -141,7 +143,7 @@ module.exports = http.createServer(async (req, res) => {
         throw JSON.stringify({error: 'Id not provided!'});
       }
 
-      const users = await getData(filePath);
+      const users = await userController.getData();
 
       const userExists = users.find(user => {
         if (user.id == id) {
@@ -160,7 +162,7 @@ module.exports = http.createServer(async (req, res) => {
         }
       });
       
-      await overwriteData(filePath, usersUpdated);
+      await userController.overwriteData(usersUpdated);
 
       res.writeHead(200, { 'content-type': 'application/json'});
       res.write(JSON.stringify({message: 'User deleted!'}));
@@ -179,3 +181,5 @@ module.exports = http.createServer(async (req, res) => {
     return res.end();
   }
 })
+
+app.listen(3333, () => console.log('Server is listening on port 3333.'));
