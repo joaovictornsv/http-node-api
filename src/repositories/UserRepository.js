@@ -12,7 +12,9 @@ class UserRepository {
       return [];
     }
     const data = lines.map((line) => {
-      const [id, name, email, age, city] = line.split(';');
+      let [id, name, email, age, city] = line.split(';');
+
+      age = parseInt(age);
 
       return {
         id, name, email, age, city,
