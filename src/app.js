@@ -42,10 +42,11 @@ const app = http.createServer(async (req, res) => {
 
     else if (method == 'POST' && route.match(postRE)) {
       const name = validateParam(url.searchParams.get('name'), 'string', 'name');
+      const email = validateParam(url.searchParams.get('email'), 'email', 'email');
       const age = validateParam(url.searchParams.get('age'), 'number', 'age');
       const city = validateParam(url.searchParams.get('city'), 'string', 'city');
       
-      const user = { name, age, city }
+      const user = { name, age, city, email }
       
       return await userController.addUser(res, user);
     }
@@ -54,10 +55,11 @@ const app = http.createServer(async (req, res) => {
     else if (method == 'PUT' && route.match(putRE)) {
       const id = getParam(route);
       const name = validateParam(url.searchParams.get('name'), 'string', 'name');
+      const email = validateParam(url.searchParams.get('email'), 'email', 'email');
       const age = validateParam(url.searchParams.get('age'), 'number', 'age');
       const city = validateParam(url.searchParams.get('city'), 'string', 'city');
       
-      const user = { id, name, age, city }      
+      const user = { id, name, age, city, email }      
       
       return await userController.updateUser(res, user)
     }

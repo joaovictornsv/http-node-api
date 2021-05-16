@@ -1,2 +1,3 @@
-uid;name;age;city
-uid-je87a2oa89-v262aa-ji896i29-viei22o;João Victor;19;Campina Grande
+uid;name;email;age;city
+uid-je87a2oa89-v262aa-ji896i29-viei22o;João Victor;joaovictor@email.com;19;Campina Grande
+uid-j6ii6298a-vs67e6-ja826so-v9e772;João Victor;joaovict2or@email.com;19;Campina Grande
