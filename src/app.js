@@ -2,11 +2,14 @@ const http = require('http');
 const _ = require('url');
 const path = require('path');
 const UserController = require('./controllers/UserController');
+const Exception = require('./errors/Exception');
+const MiddlewareException = require('./errors/MiddlewareException')
 
 
 const filePath = path.resolve(__dirname, 'data', 'users.txt');
 
 const userController = new UserController(filePath)
+const middlewareException = new MiddlewareException()
 
 
 const app = http.createServer(async (req, res) => {
@@ -30,9 +33,7 @@ const app = http.createServer(async (req, res) => {
         const userExists = await userController.getUserById(id);
 
         if (!userExists) {
-          res.writeHead(400, { 'content-type': 'application/json'});
-          res.write(JSON.stringify({error: 'User with this id does not exists'}));
-          return res.end();
+          throw new Exception('User with this id does not exists');
         }
 
         res.writeHead(200, { 'content-type': 'application/json'});
@@ -176,8 +177,8 @@ const app = http.createServer(async (req, res) => {
       return res.end();
     }
     
-  } catch (e) {
-    res.write(e)
+  } catch (err) {
+    middlewareException.handle(err, res);
     return res.end();
   }
 })
