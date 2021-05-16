@@ -42,9 +42,9 @@ class UserServices {
       throw new Exception('An user with this email already exists');
     }
 
-    const id = uid();
+    user.id = uid();
 
-    await this.userRepository.append(id);
+    await this.userRepository.append(user);
 
     return user;
   }
