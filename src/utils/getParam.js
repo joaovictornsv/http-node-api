@@ -1,5 +1,5 @@
-const getRE = /\/(users)\/?([0-9])*?\/?$/g
-const putRE = /^\/(users)\/([0-9])*\/(data((?!((\/)|(\?\/)))))/g
+const getRE = /\/(users)\/?([0-9a-z]|(\-))*?\/?$/g
+const putRE = /^\/(users)\/([0-9a-z]|(\-))*\/(data((?!((\/)|(\?\/)))))/g
 const postRE = /^\/(users)\/(data((?!((\/)|(\?\/)))))/g
 
 function getParam(route) {
