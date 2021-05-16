@@ -12,24 +12,24 @@ class UserRepository {
       return [];
     }
     const data = lines.map(line => {
-      const [ id, name, age, city ] = line.split(';');
+      const [ id, name, email, age, city ] = line.split(';');
       
-      return { id, name, age, city};
+      return { id, name, email, age, city};
     })
 
     return data;
   }
 
   async append(user) {
-    const { id, name, age, city } = user;
+    const { id, name, email, age, city } = user;
 
-    await fs.writeFile(this.file, `\n${id};${name};${age};${city}`, { flag: 'a' });
+    await fs.writeFile(this.file, `\n${id};${name};${email};${age};${city}`, { flag: 'a' });
   }
 
   async write(user) {
-    const { id, name, age, city } = user;
+    const { id, name, age, email, city } = user;
     
-    await fs.writeFile(this.file, `${id};${name};${age};${city}`);
+    await fs.writeFile(this.file, `${id};${name};${email};${age};${city}`);
   }
 
   async findByID(id) {
@@ -43,15 +43,26 @@ class UserRepository {
     return user;
   }
 
+  async findByEmail(email) {
+    const users = await this.find();
+    const user = users.find(u => {
+      if (u.email == email) {
+        return u;
+      }
+    })
+
+    return user;
+  }
+
   async updateData(data) {
     const overwrite = async () => {
       if (data.length == 0) {
-        await fs.writeFile(this.file, 'uid;name;age;city')
+        await fs.writeFile(this.file, 'uid;name;email;age;city')
       }
       else {
         for (let i = 0; i < data.length; i++) {
           if (i == 0) {
-            await fs.writeFile(this.file, 'uid;name;age;city');
+            await fs.writeFile(this.file, 'uid;name;email;age;city');
             await this.append(data[i]);
           } 
           else {
