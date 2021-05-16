@@ -1,39 +1,51 @@
-const fs = require('fs').promises;
-const UserRepository = require('../repositories/UserRepository')
+const UserServices = require('../services/UserServices')
+const response = require('../utils/response')
 
 class UserController {
-
+  
   constructor(path) {
-    this.file = path
-    this.userRepository = new UserRepository(path)
+    this.path = path;
   }
-  
-  
-  async getData() {
-    const users = this.userRepository.find();
 
-    return users;
-  }
+  async index(res) {
   
-  async addUser(user, append=true) {
-       
-    if (append) {
-      await this.userRepository.append(user);
-    }
-    else {
-      await this.userRepository.write(user);
-    }
-  }
-  
-  async getUserById(id) {
-    const user = await this.userRepository.findByID(id)
+    const userServices = new UserServices(this.path)
+
+    const users = await userServices.getAllUsers();
     
-    return user;
+    return response(res, users) 
+  }
+
+  async indexUser(res, id='') {
+    const userServices = new UserServices(this.path)
+  
+    const user = await userServices.getUser(id);
+    
+    return response(res, user);
+  }
+
+  async addUser(res, user) {
+    const userServices = new UserServices(this.path);
+
+    const newUser = await userServices.createUser(user);
+
+    return response(res, newUser, 201);
   }
   
-  async overwriteData(data) {
-    await this.userRepository.updateData();
+  async updateUser(res, user) {
+    const userServices = new UserServices(this.path)
+    
+    const newUser = await userServices.modifyUser(user);
+
+    return response(res, newUser);
   }
-  
+
+  async deleteUser(res, id) {
+    const userServices = new UserServices(this.path)
+    
+    await userServices.removeUser(id);
+
+    return response(res, {message: `User with id ${id} deleted!`});
+  }
 }
 module.exports = UserController;
