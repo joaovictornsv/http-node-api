@@ -5,7 +5,7 @@ function validateType(param, type, field) {
     param = parseInt(param)
   }
 
-  if(typeof param != type || isNaN(param)) {
+  if(typeof param != type || (type=='number' && isNaN(param))) {
     throw new Exception(`The field '${field}' must be of type '${type}'`);
   }
 
