@@ -48,7 +48,7 @@ class UserServices {
       throw new Exception('No fields to edit provided!');
     }
 
-    const userExists = await this.userRepository.findByID(id);
+    const userExists = await this.userRepository.findByID(user.id);
     
     if (!userExists) {
       throw new Exception('User does not exist');
@@ -63,7 +63,7 @@ class UserServices {
     const users = await this.userRepository.find();
 
     const usersUpdated = users.map(u => {
-      if (u.id == id) {
+      if (u.id == user.id) {
         changes.forEach(change => {
           u[change[0]] = change[1];
         })
@@ -73,8 +73,8 @@ class UserServices {
     });
 
     await this.userRepository.updateData(usersUpdated);
-
-    return user;
+    
+    return this.userRepository.findByID(user.id);
   }
   
 

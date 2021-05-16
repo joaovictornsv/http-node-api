@@ -18,7 +18,7 @@ const app = http.createServer(async (req, res) => {
   const method = req.method;
   
   const route = url.pathname;
-
+  
   try {
     if (route == '/') {
       
@@ -53,7 +53,7 @@ const app = http.createServer(async (req, res) => {
 
 
     else if (method == 'PUT' && route.match(putRE)) {
-      const id = url.searchParams.get('id');
+      const id = getParam(route);
       const name = url.searchParams.get('name');
       const age = url.searchParams.get('age');
       const city = url.searchParams.get('city');

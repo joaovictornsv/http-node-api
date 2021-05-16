@@ -1,11 +1,17 @@
 const getRE = /\/(users)\/?([0-9])*?\/?$/g
-const putRE = /^\/(users)\/([0-9])*\/data/g
-const postRE = /^\/(users)\/(data)/g
+const putRE = /^\/(users)\/([0-9])*\/(data(?!\/))/g
+const postRE = /^\/(users)\/(data(?!\/))/g
 
 function getParam(route) {
   const allParams = route.split('/');
-
-  const param = allParams.length == 3 ? allParams[2] : null;
+  let param = null;
+  if (allParams.length >= 3) {
+    param = allParams[2]
+    
+    if (param == '') {
+      param = null
+    }
+  }
 
   return param;
 }
