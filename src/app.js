@@ -1,6 +1,7 @@
 const http = require('http');
 const _ = require('url');
 const path = require('path');
+
 const UserController = require('./controllers/UserController');
 const Exception = require('./errors/Exception');
 const MiddlewareException = require('./errors/MiddlewareException')
@@ -57,19 +58,16 @@ const app = http.createServer(async (req, res) => {
       const city = url.searchParams.get('city');
       
       if (!id || !name || !age || !city) {
-        res.writeHead(400, { 'content-type': 'application/json'});
-        res.write(JSON.stringify({error: 'This params are incorret!'}));
-        return res.end();
+        throw new Exception('This params are incorret!');
       }
       
       
       const userAlreadyExists = await userController.getUserById(id);
       
       if (userAlreadyExists) {
-        res.writeHead(400, { 'content-type': 'application/json'});
-        res.write(JSON.stringify({error: 'An user with this id already exists'}));
-        return res.end();
+        throw new Exception('An user with this id already exists');
       }
+
       const newUser = { id, name, age, city }
       
       await userController.addUser(newUser);
@@ -89,15 +87,11 @@ const app = http.createServer(async (req, res) => {
       const city = url.searchParams.get('city');
       
       if (!id) {
-        res.writeHead(400, { 'content-type': 'application/json'});
-        res.write(JSON.stringify({error: 'Id not provided!'}));
-        return res.end();
+        throw new Exception('Id not provided!');
       }
       
       if (!name && !age && !city) {
-        res.writeHead(400, { 'content-type': 'application/json'});
-        res.write(JSON.stringify({error: 'No fields to edit provided!'}));
-        return res.end();
+        throw new Exception('No fields to edit provided!');
       }
       const users = await userController.getData();
       
@@ -108,8 +102,7 @@ const app = http.createServer(async (req, res) => {
       })
       
       if (!userExists) {
-        res.writeHead(400, { 'content-type': 'application/json'});
-        throw JSON.stringify({error: 'User does not exist'});
+        throw new Exception('User does not exist');
       }
       const changes = []
       
@@ -130,7 +123,8 @@ const app = http.createServer(async (req, res) => {
       await userController.overwriteData(usersUpdated);
       
       res.writeHead(200, { 'content-type': 'application/json'});
-      throw JSON.stringify({message: 'Data updated'});
+      res.write({message: 'Data updated'})
+      return res.end();
     }
     
     
@@ -140,8 +134,7 @@ const app = http.createServer(async (req, res) => {
       const id = url.searchParams.get('id');
 
       if (!id) {
-        res.writeHead(400, { 'content-type': 'application/json'});
-        throw JSON.stringify({error: 'Id not provided!'});
+        throw new Exception('Id not provided!');
       }
 
       const users = await userController.getData();
@@ -153,8 +146,7 @@ const app = http.createServer(async (req, res) => {
       })
       
       if (!userExists) {
-        res.writeHead(400, { 'content-type': 'application/json'});
-        throw JSON.stringify({error: 'User does not exist'});
+        throw new Exception('User does not exist');
       }
 
       const usersUpdated = users.filter(user => {
@@ -172,9 +164,7 @@ const app = http.createServer(async (req, res) => {
 
     // 404
     else {
-      res.writeHead(404, { 'content-type': 'application/json'});
-      res.write(JSON.stringify({error: 'resource not found'}));
-      return res.end();
+      throw new Exception('Resource not found')
     }
     
   } catch (err) {
