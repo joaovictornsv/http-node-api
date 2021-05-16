@@ -1,60 +1,38 @@
 const fs = require('fs').promises;
+const UserRepository = require('../repositories/UserRepository')
 
 class UserController {
-  
+
   constructor(path) {
     this.file = path
+    this.userRepository = new UserRepository(path)
   }
   
   
   async getData() {
-    const file = await fs.readFile(this.file, 'utf8');
-    const lines = file.split('\n');
-    
-    const data = lines.map(line => {
-      const [ id, name, age, city ] = line.split(';');
-      
-      return { id, name, age, city};
-    })
-    
-    return data;
+    const users = this.userRepository.find();
+
+    return users;
   }
   
   async addUser(user, append=true) {
-    
-    const { id, name, age, city } = user;
-    
+       
     if (append) {
-      await fs.writeFile(this.file, `\n${id};${name};${age};${city}`, { flag: 'a' });
+      await this.userRepository.append(user);
     }
     else {
-      await fs.writeFile(this.file, `${id};${name};${age};${city}`);
+      await this.userRepository.write(user);
     }
   }
   
   async getUserById(id) {
-    const users = await this.getData(this.file);
-    
-    const user = users.find(user => {
-      if (user.id == id) {
-        return user;
-      }
-    })
+    const user = await this.userRepository.findByID(id)
     
     return user;
   }
   
   async overwriteData(data) {
-    (async () => {
-      for (let i = 0; i < data.length; i++) {
-        if (i == 0) {
-          await this.addUser(data[i], this.file, false);
-        } 
-        else {
-          await this.addUser(data[i], this.file);
-        }
-      }
-    })()
+    await this.userRepository.updateData();
   }
   
 }

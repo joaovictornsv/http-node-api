@@ -9,6 +9,7 @@ class MiddlewareException {
       
     }
     else {
+      console.log(error)
       res.write(error)
     }
   }

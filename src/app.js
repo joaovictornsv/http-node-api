@@ -12,7 +12,6 @@ const filePath = path.resolve(__dirname, 'data', 'users.txt');
 const userController = new UserController(filePath)
 const middlewareException = new MiddlewareException()
 
-
 const app = http.createServer(async (req, res) => {
   const url = new _.URL('http://localhost:3333'+req.url)
 
