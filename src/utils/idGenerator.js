@@ -20,10 +20,12 @@ function authID(id) {
 function uid() {
   const date = new Date();
 
-  const first = date.getMilliseconds() * date.getUTCMilliseconds() * date.getUTCMilliseconds();
-  const second = date.getSeconds() * date.getUTCSeconds() * date.getUTCMilliseconds();
-  const third = date.getMinutes() * date.getUTCMinutes() * date.getUTCMilliseconds();
-  const fourth = date.getHours() * date.getUTCHours() * date.getUTCMilliseconds();
+  const increment = date.getDay() + date.getMonth() + date.getFullYear();
+
+  const first = date.getMilliseconds() * date.getUTCMilliseconds() * date.getUTCMilliseconds() + increment;
+  const second = date.getSeconds() * date.getUTCSeconds() * date.getUTCMilliseconds() + increment;
+  const third = date.getMinutes() * date.getUTCMinutes() * date.getUTCMilliseconds() + increment;
+  const fourth = date.getHours() * date.getUTCHours() * date.getUTCMilliseconds() + increment;
 
   const id = `uid-j${encrypt(first)}-v${encrypt(second)}-j${encrypt(third)}-v${encrypt(fourth)}`;
 
