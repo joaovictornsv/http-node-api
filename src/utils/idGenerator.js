@@ -9,7 +9,7 @@ function encrypt(number) {
 }
 
 function authID(id) {
-  const uidRE = /^(uid-j[0-9a-z*]*-v[0-9a-z*]*-j[0-9a-z*]*-v[0-9a-z*]*)$/g
+  const uidRE = /^(uid-j[0-9a-z*]*-v[0-9a-z*]*-j[0-9a-z*]*-v[0-9a-z*]*)$/g;
 
   if (id.toString().match(uidRE)) {
     return true;
@@ -25,9 +25,9 @@ function uid() {
   const third = date.getMinutes() * date.getUTCMinutes() * date.getUTCMilliseconds();
   const fourth = date.getHours() * date.getUTCHours() * date.getUTCMilliseconds();
 
-  const uid = `uid-j${encrypt(first)}-v${encrypt(second)}-j${encrypt(third)}-v${encrypt(fourth)}`
+  const id = `uid-j${encrypt(first)}-v${encrypt(second)}-j${encrypt(third)}-v${encrypt(fourth)}`;
 
-  return uid;
+  return id;
 }
 
-module.exports = {uid, authID}
+module.exports = { uid, authID };

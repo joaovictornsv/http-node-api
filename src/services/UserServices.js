@@ -1,17 +1,16 @@
-const UserRepository = require('../repositories/UserRepository')
+const UserRepository = require('../repositories/UserRepository');
 const Exception = require('../middlewares/Exception');
-const { uid, authID } = require('../utils/idGenerator')
+const { uid, authID } = require('../utils/idGenerator');
 
 class UserServices {
-
   constructor(path) {
-    this.userRepository = new UserRepository(path)
+    this.userRepository = new UserRepository(path);
   }
 
   async getAllUsers() {
     const users = await this.userRepository.find();
 
-    return users
+    return users;
   }
 
   async getUser(id) {
@@ -25,25 +24,29 @@ class UserServices {
       throw new Exception('User with this id does not exists');
     }
 
-    return userExists
+    return userExists;
   }
 
   async createUser(user) {
-    if (!user.name || !user.age || !user.city || !user.email) {
+    const {
+      name, age, city, email,
+    } = user;
+
+    if (!name || !age || !city || !email) {
       throw new Exception('This params are incorret!');
     }
-    
-    const userAlreadyExists = await this.userRepository.findByEmail(user.email);
-    
+
+    const userAlreadyExists = await this.userRepository.findByEmail(email);
+
     if (userAlreadyExists) {
       throw new Exception('An user with this email already exists');
     }
 
-    user.id = uid();
+    const id = uid();
 
-    await this.userRepository.append(user);
+    await this.userRepository.append(id);
 
-    return user
+    return user;
   }
 
   async modifyUser(user) {
@@ -60,43 +63,43 @@ class UserServices {
     }
 
     const userExists = await this.userRepository.findByID(user.id);
-    
+
     if (!userExists) {
       throw new Exception('User with this id does not exist');
     }
 
     if (user.email) {
       const emailAlreadyExists = await this.userRepository.findByEmail(user.email);
-      
+
       if (emailAlreadyExists) {
         throw new Exception('An user with this email already exists');
       }
     }
 
-    const changes = []
-      
-    user.name && changes.push(['name', user.name])
-    user.email && changes.push(['email', user.email])
-    user.age && changes.push(['age', user.age])
-    user.city && changes.push(['city', user.city])
-    
+    const changes = [];
+
+    user.name && changes.push(['name', user.name]);
+    user.email && changes.push(['email', user.email]);
+    user.age && changes.push(['age', user.age]);
+    user.city && changes.push(['city', user.city]);
+
     const users = await this.userRepository.find();
 
-    const usersUpdated = users.map(u => {
-      if (u.id == user.id) {
-        changes.forEach(change => {
-          u[change[0]] = change[1];
-        })
+    const usersUpdated = users.map((u) => {
+      if (u.id === user.id) {
+        changes.forEach((change) => {
+          const [key, value] = change;
+          u[key] = value;
+        });
       }
-      
+
       return u;
     });
 
     await this.userRepository.updateData(usersUpdated);
 
-    return await this.userRepository.findByID(user.id);  
+    return this.userRepository.findByID(user.id);
   }
-  
 
   async removeUser(id) {
     if (!id) {
@@ -115,14 +118,13 @@ class UserServices {
 
     const users = await this.userRepository.find();
 
-    const usersUpdated = users.filter(user => {
-      if (user.id != id) {
+    const usersUpdated = users.filter((user) => {
+      if (user.id !== id) {
         return user;
       }
     });
 
     await this.userRepository.updateData(usersUpdated);
-
   }
 }
 

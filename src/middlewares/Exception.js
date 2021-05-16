@@ -1,8 +1,8 @@
 class Exception {
-  constructor(message, statusCode=400, contentType='application/json') {
+  constructor(message, statusCode = 400, contentType = 'application/json') {
     this.statusCode = statusCode;
-    this.contentType = { 'content-type': contentType};
-    this.message = JSON.stringify({error: message});
+    this.contentType = { 'content-type': contentType };
+    this.message = JSON.stringify({ error: message });
   }
 }
 

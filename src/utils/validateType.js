@@ -1,28 +1,30 @@
-const Exception = require('../middlewares/Exception')
+const Exception = require('../middlewares/Exception');
 
 function validateType(param, type, field) {
-  if (type == 'number') {
-    param = parseInt(param);
-    
-    if (typeof param == type && !isNaN(param)) {
-      return param;
+  let Vparam = param;
+  const Vtype = type;
+
+  if (Vtype === 'number') {
+    Vparam = parseInt(Vparam, 10);
+
+    if (typeof Vparam === Vtype && !isNaN(Vparam)) {
+      return Vparam;
     }
   }
 
-  if (type == 'email') {
-    const emailRE = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g
+  if (Vtype === 'email') {
+    const emailRE = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/g;
 
-    if (param.match(emailRE)) {
-      return param;
+    if (Vparam.match(emailRE)) {
+      return Vparam;
     }
   }
 
-  if (type == 'string') {
-    return param;
+  if (Vtype === 'string') {
+    return Vparam;
   }
 
-  throw new Exception(`The field '${field}' must be of type '${type}'`);
-
+  throw new Exception(`The field '${field}' must be of type '${Vtype}'`);
 }
 
 module.exports = validateType;
