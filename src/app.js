@@ -3,8 +3,7 @@ const _ = require('url');
 const path = require('path');
 
 const UserController = require('./controllers/UserController');
-const Exception = require('./errors/Exception');
-const MiddlewareException = require('./errors/MiddlewareException');
+const MiddlewareException = require('./middlewares/MiddlewareException');
 const { getRE, postRE, putRE,  getParam } = require('./utils/getParam')
 const validateParam = require('./utils/validateParam')
 
@@ -42,10 +41,10 @@ const app = http.createServer(async (req, res) => {
 
 
     else if (method == 'POST' && route.match(postRE)) {
-      const id = validateParam(url.searchParams.get('id'));
-      const name = validateParam(url.searchParams.get('name'));
-      const age = validateParam(url.searchParams.get('age'));
-      const city = validateParam(url.searchParams.get('city'));
+      const id = validateParam(url.searchParams.get('id'), 'string', 'id');
+      const name = validateParam(url.searchParams.get('name'), 'string', 'name');
+      const age = validateParam(url.searchParams.get('age'), 'number', 'age');
+      const city = validateParam(url.searchParams.get('city'), 'string', 'city');
       
       const user = { id, name, age, city }
       
@@ -55,9 +54,9 @@ const app = http.createServer(async (req, res) => {
 
     else if (method == 'PUT' && route.match(putRE)) {
       const id = getParam(route);
-      const name = validateParam(url.searchParams.get('name'));
-      const age = validateParam(url.searchParams.get('age'));
-      const city = validateParam(url.searchParams.get('city'));
+      const name = validateParam(url.searchParams.get('name'), 'string', 'name');
+      const age = validateParam(url.searchParams.get('age'), 'number', 'age');
+      const city = validateParam(url.searchParams.get('city'), 'string', 'city');
       
       const user = { id, name, age, city }      
       
@@ -70,10 +69,11 @@ const app = http.createServer(async (req, res) => {
       
       return await userController.deleteUser(res, id); 
     }
-    
     // 404
     else {
-      throw new Exception('Resource not found')
+      res.writeHead(200, { 'content-type': 'text/plain'})
+      res.write(`Cannot ${method} ${route}`);
+      return res.end();
     }
     
   }

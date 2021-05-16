@@ -1,5 +1,5 @@
 const UserRepository = require('../repositories/UserRepository')
-const Exception = require('../errors/Exception');
+const Exception = require('../middlewares/Exception');
 
 class UserServices {
 
@@ -73,7 +73,6 @@ class UserServices {
     });
 
     await this.userRepository.updateData(usersUpdated);
-    
     return this.userRepository.findByID(user.id);
   }
   
