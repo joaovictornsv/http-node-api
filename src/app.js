@@ -41,12 +41,11 @@ const app = http.createServer(async (req, res) => {
 
 
     else if (method == 'POST' && route.match(postRE)) {
-      const id = validateParam(url.searchParams.get('id'), 'string', 'id');
       const name = validateParam(url.searchParams.get('name'), 'string', 'name');
       const age = validateParam(url.searchParams.get('age'), 'number', 'age');
       const city = validateParam(url.searchParams.get('city'), 'string', 'city');
       
-      const user = { id, name, age, city }
+      const user = { name, age, city }
       
       return await userController.addUser(res, user);
     }
