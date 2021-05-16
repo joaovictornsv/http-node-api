@@ -7,8 +7,10 @@ class UserRepository {
 
   async find() {
     const file = await fs.readFile(this.file, 'utf8');
-    const lines = file.split('\n');
-    
+    const lines = file.split('\n').splice(1);
+    if (!lines) {
+      return [];
+    }
     const data = lines.map(line => {
       const [ id, name, age, city ] = line.split(';');
       
@@ -32,27 +34,34 @@ class UserRepository {
 
   async findByID(id) {
     const users = await this.find();
-    
-    const user = users.find(user => {
-      if (user.id == id) {
-        return user;
+    const user = users.find(u => {
+      if (u.id == id) {
+        return u;
       }
     })
-    
+
     return user;
   }
 
   async updateData(data) {
-    (async () => {
-      for (let i = 0; i < data.length; i++) {
-        if (i == 0) {
-          await this.write(data[i]);
-        } 
-        else {
-          await this.append(data[i]);
+    const overwrite = async () => {
+      if (data.length == 0) {
+        await fs.writeFile(this.file, 'uid;name;age;city')
+      }
+      else {
+        for (let i = 0; i < data.length; i++) {
+          if (i == 0) {
+            await fs.writeFile(this.file, 'uid;name;age;city');
+            await this.append(data[i]);
+          } 
+          else {
+            await this.append(data[i]);
+          }
         }
       }
-    })()
+    }
+
+    await overwrite();
   }
 
 }
