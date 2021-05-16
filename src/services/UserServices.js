@@ -1,5 +1,6 @@
 const UserRepository = require('../repositories/UserRepository')
 const Exception = require('../middlewares/Exception');
+const { uid, authID } = require('../utils/idGenerator')
 
 class UserServices {
 
@@ -16,6 +17,10 @@ class UserServices {
   async getUser(id) {
     const userExists = await this.userRepository.findByID(id);
 
+    if (!authID(id)) {
+      throw new Exception("The 'id must be of type 'uid'");
+    }
+
     if (!userExists) {
       throw new Exception('User with this id does not exists');
     }
@@ -24,9 +29,11 @@ class UserServices {
   }
 
   async createUser(user) {
-    if (!user.id || !user.name || !user.age || !user.city) {
+    if (!user.name || !user.age || !user.city) {
       throw new Exception('This params are incorret!');
     }
+
+    user.id = uid();
 
     const userAlreadyExists = await this.userRepository.findByID(user.id);
     
@@ -43,7 +50,11 @@ class UserServices {
     if (!user.id) {
       throw new Exception('Id not provided!');
     }
-    
+
+    if (!authID(user.id)) {
+      throw new Exception("The 'id must be of type 'uid'");
+    }
+
     if (!user.name && !user.age && !user.city) {
       throw new Exception('No fields to edit provided!');
     }
@@ -51,7 +62,7 @@ class UserServices {
     const userExists = await this.userRepository.findByID(user.id);
     
     if (!userExists) {
-      throw new Exception('User does not exist');
+      throw new Exception('User with this id does not exist');
     }
 
     const changes = []
@@ -73,13 +84,18 @@ class UserServices {
     });
 
     await this.userRepository.updateData(usersUpdated);
-    return this.userRepository.findByID(user.id);
+
+    return await this.userRepository.findByID(user.id);  
   }
   
 
   async removeUser(id) {
     if (!id) {
       throw new Exception('Id not provided!');
+    }
+
+    if (!authID(id)) {
+      throw new Exception("The 'id must be of type 'uid'");
     }
 
     const userExists = await this.userRepository.findByID(id);
