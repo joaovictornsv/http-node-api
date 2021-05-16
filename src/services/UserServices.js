@@ -29,17 +29,17 @@ class UserServices {
   }
 
   async createUser(user) {
-    if (!user.name || !user.age || !user.city) {
+    if (!user.name || !user.age || !user.city || !user.email) {
       throw new Exception('This params are incorret!');
+    }
+    
+    const userAlreadyExists = await this.userRepository.findByEmail(user.email);
+    
+    if (userAlreadyExists) {
+      throw new Exception('An user with this email already exists');
     }
 
     user.id = uid();
-
-    const userAlreadyExists = await this.userRepository.findByID(user.id);
-    
-    if (userAlreadyExists) {
-      throw new Exception('An user with this id already exists');
-    }
 
     await this.userRepository.append(user);
 
@@ -55,7 +55,7 @@ class UserServices {
       throw new Exception("The 'id must be of type 'uid'");
     }
 
-    if (!user.name && !user.age && !user.city) {
+    if (!user.name && !user.age && !user.city && !user.email) {
       throw new Exception('No fields to edit provided!');
     }
 
@@ -65,9 +65,18 @@ class UserServices {
       throw new Exception('User with this id does not exist');
     }
 
+    if (user.email) {
+      const emailAlreadyExists = await this.userRepository.findByEmail(user.email);
+      
+      if (emailAlreadyExists) {
+        throw new Exception('An user with this email already exists');
+      }
+    }
+
     const changes = []
       
     user.name && changes.push(['name', user.name])
+    user.email && changes.push(['email', user.email])
     user.age && changes.push(['age', user.age])
     user.city && changes.push(['city', user.city])
     
