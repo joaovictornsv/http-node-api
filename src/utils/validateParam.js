@@ -1,4 +1,5 @@
 const validateType = require('./validateType');
+const Exception = require('../middlewares/Exception')
 
 function validateParam(param, type, field) {
   if (!param) {
@@ -9,8 +10,9 @@ function validateParam(param, type, field) {
 
   if (param.match(searchParamRE)) {
     return validateType(param, type, field);
+  } else {
+    throw new Exception('Invalid params');
   }
-  return null;
 }
 
 module.exports = validateParam;
