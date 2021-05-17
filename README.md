@@ -8,6 +8,18 @@
     </h4>
 </div>
 
+## Como usar
+```bash
+# Clone this repository
+$ git clone https://github.com/joaovictornsv/http-node-api
+
+# Go into the repository
+$ cd http-node-api
+
+# Run the server
+$ yarn start
+```
+
 <hr>
 
 ## Rotas
