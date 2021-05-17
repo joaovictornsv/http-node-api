@@ -70,6 +70,8 @@ A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e pos
 
 ## :books: O que aprendi
 
+<sup>[Voltar ao topo](#conteudos)</sup><br>
+
 Ter que implementar cada etapa da api, desde o tratamento dos dados até o retorno da resposta para o cliente contribuiu bastante para treinar minha lógica de programação, a eficiência em resolver problemas pequenos e também a criar códigos mais legíveis e limpos.
 Além disso, aprendi a utilizar RegEx's para realizar várias validações no projeto. Por fim, acredito que criar essa API "pura" me fez evoluir mais um degrau nessa jornada de back-end.
 
