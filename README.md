@@ -62,6 +62,7 @@ Search params:
 ```
 
 <hr>
+
 **![](https://img.shields.io/badge/delete-FF4D4B.svg?&style=for-the-badge&logoColor=white)**
 
 - Delete a user
