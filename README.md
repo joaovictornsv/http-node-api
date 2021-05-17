@@ -5,10 +5,23 @@
     </h1>
     <h4>
         Uma api sem dependências!
-    </h4>
+    </h4>    
+    <img  alt="Dependencies"  src=https://img.shields.io/badge/dependecies-0-brightgreen.svg?style=flat-square">
+    <img  alt="Language Top"  src="https://img.shields.io/github/languages/top/joaovictornsv/http-node-api">
+     <a  href="https://github.com/joaovictornsv/climate-app/blob/master/LICENSE">
+        <img  alt="License"  src="https://img.shields.io/github/license/joaovictornsv/climate-app.svg">
+    </a>
 </div>
 
-## Sobre o projeto
+---
+
+[➜ Sobre o projeto](#mag_right-sobre-o-projeto)<br>
+[➜ Como usar](#information_source-como-usar)<br>
+[➜ Rotas](#arrow_right_hook-rotas)<br>
+
+---
+
+## :mag_right: Sobre o projeto
 O objetivo dessa aplicação era criar uma API sem nenhuma dependência externa, apenas utilizando as bibliotecas nativas do NodeJS. Tudo foi feito utilizando 100% Javascript.
 
 ### Banco de Dados
@@ -39,7 +52,9 @@ A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e pos
 - Gerador de IDs únicos
 - Uso de Controller, Repository e Services
 
-## Como usar
+---
+
+## :information_source: Como usar
 ```bash
 # Clone this repository
 $ git clone https://github.com/joaovictornsv/http-node-api
@@ -53,7 +68,7 @@ $ yarn start
 
 ---
 
-## Rotas
+## :arrow_right_hook: Rotas
 
 <br/>
 
@@ -122,13 +137,10 @@ Search params:
 
 ---
 
-<div align="center">
-
-### :pencil2: Author
+### :pencil2: Author 
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/joaovictornsv"><img src="https://github.com/joaovictornsv.png" width="100px;" alt="Profile"/><br /><sub><b>João Victor</b></sub></a><br /><a href="https://github.com/joaovictornsv" title="Code">💻</a></td>
   <tr>
 </table>
-</div>
