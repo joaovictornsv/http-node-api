@@ -29,28 +29,36 @@
 
 O objetivo dessa aplicação era criar uma API sem nenhuma dependência externa, apenas utilizando as bibliotecas nativas do NodeJS. Tudo foi feito utilizando 100% Javascript.
 
-### Banco de Dados
+---
+
+### ➜ Banco de Dados
 Não foi utilizado nenhum banco de dados, os registros são armazenados em um arquivo `users.txt`. Escolhi trabalhar com txt ao invés de JSON para ter mais desafio, que é ler arquivos usando o Node.
 
-### Arquitetura
+---
+
+### ➜ Arquitetura
 Tentei utilizar, na medida do possível, o conceito da Clean Architecture, separando os arquivos em Controllers, Services e Repository.
 
-### Tratamento de erros
-Como o módulo `http` nativo do Node não nos permite usar o `request.body` tive que adaptar minhas rotas e validar os dados passados por elas.
+---
+
+### ➜ Tratamento de erros
+Como o módulo `http` nativo do Node não nos permite usar o `request.body`, tive que adaptar minhas rotas e validar os dados passados por elas.
 Além disso, a estrutura da rota também foi validada, pois diferente de bibliotecas como o ExpressJS, onde passar a string `/users/:id` em uma função de request já nos permite acessar o parâmetro com facilidade, no Node esse acesso não é permitido. Para isso tive que criar modos de obtê-los.
 
 Para os tratamentos e validações utilizei as famosas RegEx's, as quais aprendi bastante sobre como atuam durante o desenvolvimento desse projeto.
 
-### Funcionalidades
+---
+
+### ➜ Funcionalidades
 A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e possui as seguintes funcionalidades:
 
-#### Funções principais
+#### Funções principais:
 - Listagem de usuários ou usuário único
 - Criação de novo usuário
 - Alteração de dados de um usuário
 - Remoção de um usuário
 
-#### Outras funcionalidades
+#### Outras funcionalidades:
 - Validação de dados
 - Validação de rotas
 - Tratamento de erros usando Middlewares
@@ -86,7 +94,7 @@ $ yarn start
 
 <br/>
 
-**![](https://img.shields.io/badge/get-BD93F9.svg?&style=for-the-badge&logoColor=white)**
+![](https://img.shields.io/badge/get-BD93F9.svg?&style=for-the-badge&logoColor=white)
 
 - Home page
 
@@ -107,7 +115,7 @@ $ yarn start
 
 ---
 
-**![](https://img.shields.io/badge/post-49F37B.svg?&style=for-the-badge&logoColor=white)**
+![](https://img.shields.io/badge/post-49F37B.svg?&style=for-the-badge&logoColor=white)
 - Create a user
 
 ```
@@ -122,7 +130,7 @@ Search params:
 
 ---
 
-**![](https://img.shields.io/badge/put-FFB86C.svg?&style=for-the-badge&logoColor=white)**
+![](https://img.shields.io/badge/put-FFB86C.svg?&style=for-the-badge&logoColor=white)
 - Update a user
 
 ```
@@ -137,7 +145,7 @@ Search params:
 
 ---
 
-**![](https://img.shields.io/badge/delete-FF4D4B.svg?&style=for-the-badge&logoColor=white)**
+![](https://img.shields.io/badge/delete-FF4D4B.svg?&style=for-the-badge&logoColor=white)
 
 - Delete a user
 
