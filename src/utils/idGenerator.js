@@ -49,10 +49,4 @@ function uid() {
   return id;
 }
 
-console.log(uid());
-console.log(uid());
-console.log(uid());
-console.log(uid());
-console.log(uid());
-
 module.exports = { uid, authID };
