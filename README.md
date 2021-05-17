@@ -50,7 +50,7 @@ Para os tratamentos e validações utilizei as famosas RegEx's, as quais aprendi
 
 ---
 
-### ➜ ✔️ Funcionalidades
+### ➜ Funcionalidades ✔️
 A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e possui as seguintes funcionalidades:
 
 #### Funções principais:
