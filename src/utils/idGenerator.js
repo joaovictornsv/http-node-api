@@ -1,9 +1,9 @@
 function encrypt(number) {
-  let numberEncrypt = number.toString().split(0).join('o');
-  numberEncrypt = numberEncrypt.split(1).join('i');
-  numberEncrypt = numberEncrypt.split(3).join('e');
-  numberEncrypt = numberEncrypt.split(4).join('a');
-  numberEncrypt = numberEncrypt.split(5).join('s');
+  let numberEncrypt = number.toString().replace('0', 'o');
+  numberEncrypt = numberEncrypt.replace('1', 'i');
+  numberEncrypt = numberEncrypt.replace('3', 'e');
+  numberEncrypt = numberEncrypt.replace('4', 'a');
+  numberEncrypt = numberEncrypt.replace('5', 's');
 
   return numberEncrypt;
 }
@@ -21,11 +21,13 @@ function uid() {
   const date = new Date();
 
   const increment = date.getDay() + date.getMonth() + date.getFullYear();
+  
+  const UTCMilli = date.getUTCMilliseconds();
 
-  const first = date.getMilliseconds() * date.getUTCMilliseconds() * date.getUTCMilliseconds() + increment;
-  const second = date.getSeconds() * date.getUTCSeconds() * date.getUTCMilliseconds() + increment;
-  const third = date.getMinutes() * date.getUTCMinutes() * date.getUTCMilliseconds() + increment;
-  const fourth = date.getHours() * date.getUTCHours() * date.getUTCMilliseconds() + increment;
+  const first = date.getMilliseconds() * (UTCMilli + 10) * (UTCMilli + 20) * (parseInt(Math.random() * 10) + 1) + increment;
+  const second = (date.getSeconds()+1) * (date.getUTCSeconds()+1) * (UTCMilli + 30) * (parseInt(Math.random() * 10) + 2) + increment;
+  const third = (date.getMinutes()+1) * (date.getUTCMinutes()+1) * (UTCMilli + 40) * (parseInt(Math.random() * 10) + 3) + increment;
+  const fourth = (date.getHours()+1) * (date.getUTCHours()+1) * (UTCMilli + 50) * (parseInt(Math.random() * 10) + 4) + increment;
 
   const id = `uid-j${encrypt(first)}-v${encrypt(second)}-j${encrypt(third)}-v${encrypt(fourth)}`;
 
