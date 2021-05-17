@@ -32,7 +32,7 @@ O objetivo dessa aplicação era criar uma API sem nenhuma dependência externa,
 ---
 
 ### ➜ Banco de Dados
-Não foi utilizado nenhum banco de dados, os registros são armazenados em um arquivo `users.txt`. Escolhi trabalhar com txt ao invés de JSON para ter mais desafio, que é ler arquivos usando o Node.
+Não foi utilizado nenhum banco de dados, os registros são armazenados em um arquivo `users.txt`. Escolhi trabalhar com txt ao invés de JSON para ter o desafio de ler arquivos usando o Node.
 
 ---
 
