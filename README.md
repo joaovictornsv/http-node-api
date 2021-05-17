@@ -18,7 +18,7 @@
 <h2 id="conteudos">Conteúdos</h2>
 
 [➜ Sobre o projeto](#mag_right-sobre-o-projeto)<br>
-[➜ O que aprendi](#book-o-que-aprendi)<br>
+[➜ O que aprendi](#books-o-que-aprendi)<br>
 [➜ Como usar](#information_source-como-usar)<br>
 [➜ Rotas](#arrow_right_hook-rotas)<br>
 
@@ -68,7 +68,7 @@ A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e pos
 
 ---
 
-## 📚 O que aprendi
+## :books: O que aprendi
 
 Ter que implementar cada etapa da api, desde o tratamento dos dados até o retorno da resposta para o cliente contribuiu bastante para treinar minha lógica de programação, a eficiência em resolver problemas pequenos e também a criar códigos mais legíveis e limpos.
 Além disso, aprendi a utilizar RegEx's para realizar várias validações no projeto. Por fim, acredito que criar essa API "pura" me fez evoluir mais um degrau nessa jornada de back-end.
