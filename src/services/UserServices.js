@@ -8,7 +8,15 @@ class UserServices {
   }
 
   async getAllUsers() {
-    const users = await this.userRepository.find();
+    let users;
+    await this.userRepository.find()
+      .then((result) => {
+        users = result;
+      })
+      .catch((err) => {
+        console.error(err);
+        throw new Exception('Error reading database');
+      })
 
     return users;
   }
