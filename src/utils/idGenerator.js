@@ -24,14 +24,35 @@ function uid() {
   
   const UTCMilli = date.getUTCMilliseconds();
 
-  const first = date.getMilliseconds() * (UTCMilli + 10) * (UTCMilli + 20) * (parseInt(Math.random() * 10) + 1) + increment;
-  const second = (date.getSeconds()+1) * (date.getUTCSeconds()+1) * (UTCMilli + 30) * (parseInt(Math.random() * 10) + 2) + increment;
-  const third = (date.getMinutes()+1) * (date.getUTCMinutes()+1) * (UTCMilli + 40) * (parseInt(Math.random() * 10) + 3) + increment;
-  const fourth = (date.getHours()+1) * (date.getUTCHours()+1) * (UTCMilli + 50) * (parseInt(Math.random() * 10) + 4) + increment;
+  const first =
+    date.getMilliseconds() * (UTCMilli + 10) * (UTCMilli + 20)
+    * (parseInt(Math.random() * 10) + parseInt(Math.random() * 10) + 1)
+    + increment;
+
+  const second =
+    (date.getSeconds()+1) * (date.getUTCSeconds()+1) * (UTCMilli + 30)
+    * (parseInt(Math.random() * 10) + parseInt(Math.random() * 10) + 2)
+    + increment;
+
+  const third =
+    (date.getMinutes()+1) * (date.getUTCMinutes()+1) * (UTCMilli + 40)
+    * (parseInt(Math.random() * 10) + parseInt(Math.random() * 10) + 3)
+    + increment;
+
+  const fourth =
+    (date.getHours()+1) * (date.getUTCHours()+1) * (UTCMilli + 50)
+    * (parseInt(Math.random() * 10) + parseInt(Math.random() * 10) + 4)
+    + increment;
 
   const id = `uid-j${encrypt(first)}-v${encrypt(second)}-j${encrypt(third)}-v${encrypt(fourth)}`;
 
   return id;
 }
+
+console.log(uid());
+console.log(uid());
+console.log(uid());
+console.log(uid());
+console.log(uid());
 
 module.exports = { uid, authID };
