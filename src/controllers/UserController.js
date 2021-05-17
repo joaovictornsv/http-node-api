@@ -43,7 +43,7 @@ class UserController {
 
     await userServices.removeUser(id);
 
-    return response(res, { message: `User with id ${id} deleted!` });
+    return response(res, { message: `User with id '${id}' deleted!` });
   }
 }
 module.exports = UserController;
