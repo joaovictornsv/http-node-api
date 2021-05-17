@@ -88,11 +88,8 @@ $ yarn start
 
 <sup>[Voltar ao topo](#conteudos)</sup><br>
 
-<br/>
-
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=http-node-api&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjoaovictornsv%2Fhttp-node-api%2Fmaster%2FInsomnia.json)
 
-<br/>
 
 ![](https://img.shields.io/badge/get-BD93F9.svg?&style=for-the-badge&logoColor=white)
 
