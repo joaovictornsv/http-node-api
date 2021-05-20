@@ -18,6 +18,7 @@
 <h2 id="conteudos">Conteúdos</h2>
 
 [➜ Sobre o projeto](#mag_right-sobre-o-projeto)<br>
+[➜ O que aprendi](#books-o-que-aprendi)<br>
 [➜ Como usar](#information_source-como-usar)<br>
 [➜ Rotas](#arrow_right_hook-rotas)<br>
 
@@ -32,7 +33,7 @@ O objetivo dessa aplicação era criar uma API sem nenhuma dependência externa,
 ---
 
 ### ➜ Banco de Dados
-Não foi utilizado nenhum banco de dados, os registros são armazenados em um arquivo `users.txt`. Escolhi trabalhar com txt ao invés de JSON para ter mais desafio, que é ler arquivos usando o Node.
+Não foi utilizado nenhum banco de dados, os registros são armazenados em um arquivo `users.txt`. Escolhi trabalhar com txt ao invés de JSON para ter o desafio de ler arquivos usando o Node.
 
 ---
 
@@ -49,7 +50,7 @@ Para os tratamentos e validações utilizei as famosas RegEx's, as quais aprendi
 
 ---
 
-### ➜ Funcionalidades
+### ➜ Funcionalidades ✔️
 A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e possui as seguintes funcionalidades:
 
 #### Funções principais:
@@ -64,6 +65,15 @@ A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e pos
 - Tratamento de erros usando Middlewares
 - Gerador de IDs únicos
 - Uso de Controller, Repository e Services
+
+---
+
+## :books: O que aprendi
+
+<sup>[Voltar ao topo](#conteudos)</sup><br>
+
+Ter que implementar cada etapa da api, desde o tratamento dos dados até o retorno da resposta para o cliente contribuiu bastante para treinar minha lógica de programação, a eficiência em resolver problemas pequenos e também a criar códigos mais legíveis e limpos.
+Além disso, aprendi a utilizar RegEx's para realizar várias validações no projeto. Por fim, acredito que criar essa API "pura" me fez evoluir mais um degrau nessa jornada de back-end.
 
 ---
 
