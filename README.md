@@ -8,8 +8,8 @@
     </h4>    
     <img  alt="Dependencies"  src=https://img.shields.io/badge/dependecies-0-brightgreen.svg?style=flat-square">
     <img  alt="Language Top"  src="https://img.shields.io/github/languages/top/joaovictornsv/http-node-api">
-     <a  href="https://github.com/joaovictornsv/climate-app/blob/master/LICENSE">
-        <img  alt="License"  src="https://img.shields.io/github/license/joaovictornsv/climate-app.svg">
+     <a  href="https://github.com/joaovictornsv/http-node-api/blob/master/LICENSE">
+        <img  alt="License"  src="https://img.shields.io/github/license/joaovictornsv/http-node-api.svg">
     </a>
 </div>
 
