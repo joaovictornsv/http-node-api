@@ -76,14 +76,6 @@ class UserServices {
       throw new Exception('User with this id does not exist');
     }
 
-    if (user.email) {
-      const emailAlreadyExists = await this.userRepository.findByEmail(user.email);
-
-      if (emailAlreadyExists) {
-        throw new Exception('An user with this email already exists');
-      }
-    }
-
     const changes = [];
 
     user.name && changes.push(['name', user.name]);
