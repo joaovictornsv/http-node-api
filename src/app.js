@@ -73,8 +73,11 @@ const app = http.createServer(async (req, res) => {
     }
     // 404
 
-    res.writeHead(200, { 'content-type': 'text/plain' });
-    res.write(`Cannot ${method} ${route}`);
+    res.setHeader('Access-Control-Allow-Origin', "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE');
+
+    res.writeHead(200, { 'content-type': 'application/json' });
+    res.write(JSON.stringify({erro:`Cannot ${method} ${route}`}));
     return res.end();
   } catch (err) {
     middlewareException.handle(res, err);
