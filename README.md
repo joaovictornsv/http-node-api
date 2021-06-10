@@ -8,8 +8,8 @@
     </h4>    
     <img  alt="Dependencies"  src=https://img.shields.io/badge/dependecies-0-brightgreen.svg?style=flat-square">
     <img  alt="Language Top"  src="https://img.shields.io/github/languages/top/joaovictornsv/http-node-api">
-     <a  href="https://github.com/joaovictornsv/climate-app/blob/master/LICENSE">
-        <img  alt="License"  src="https://img.shields.io/github/license/joaovictornsv/climate-app.svg">
+     <a  href="https://github.com/joaovictornsv/http-node-api/blob/master/LICENSE">
+        <img  alt="License"  src="https://img.shields.io/github/license/joaovictornsv/http-node-api.svg">
     </a>
 </div>
 
@@ -32,17 +32,24 @@ O objetivo dessa aplicação era criar uma API sem nenhuma dependência externa,
 
 ---
 
-### ➜ Banco de Dados
+### ➡ Front-end
+O front-end dessa API também foi feito utilizando 100% Javascript, sem arquivos HTML e CSS pré-criados.
+
+Para visualizar o resultado acesse o repositório: [joaovictornsv/http-node-api-web](https://github.com/joaovictornsv/http-node-api-web)
+
+---
+
+### ➡ Banco de Dados
 Não foi utilizado nenhum banco de dados, os registros são armazenados em um arquivo `users.txt`. Escolhi trabalhar com txt ao invés de JSON para ter o desafio de ler arquivos usando o Node.
 
 ---
 
-### ➜ Arquitetura
+### ➡ Arquitetura
 Tentei utilizar, na medida do possível, o conceito da Clean Architecture, separando os arquivos em Controllers, Services e Repository.
 
 ---
 
-### ➜ Tratamento de erros
+### ➡ Tratamento de erros
 Como o módulo `http` nativo do Node não nos permite usar o `request.body`, tive que adaptar minhas rotas e validar os dados passados por elas.
 Além disso, a estrutura da rota também foi validada, pois diferente de bibliotecas como o ExpressJS, onde passar a string `/users/:id` em uma função de request já nos permite acessar o parâmetro com facilidade, no Node esse acesso não é permitido. Para isso tive que criar modos de obtê-los.
 
@@ -50,7 +57,7 @@ Para os tratamentos e validações utilizei as famosas RegEx's, as quais aprendi
 
 ---
 
-### ➜ Funcionalidades ✔️
+### ➡ Funcionalidades ✔️
 A API possui um sistema de CRUD completo (Create, Read, Update and Delete) e possui as seguintes funcionalidades:
 
 #### Funções principais:
