@@ -6,7 +6,7 @@
     <h4>
         Uma api sem dependências!
     </h4>    
-    <img  alt="Dependencies"  src=https://img.shields.io/badge/dependecies-0-brightgreen.svg?style=flat-square">
+    <img  alt="Dependencies"  src="https://img.shields.io/badge/dependecies-0-brightgreen.svg?style=flat-square">
     <img  alt="Language Top"  src="https://img.shields.io/github/languages/top/joaovictornsv/http-node-api">
      <a  href="https://github.com/joaovictornsv/http-node-api/blob/master/LICENSE">
         <img  alt="License"  src="https://img.shields.io/github/license/joaovictornsv/http-node-api.svg">
@@ -107,6 +107,12 @@ $ yarn start
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=http-node-api&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjoaovictornsv%2Fhttp-node-api%2Fmaster%2FInsomnia.json)
 
+<details>
+    <summary>
+        Ver rotas
+    </summary>
+
+<br/>
 
 ![](https://img.shields.io/badge/get-BD93F9.svg?&style=for-the-badge&logoColor=white)
 
@@ -166,7 +172,8 @@ Search params:
 ```
 /users/:id
 ```
-
+</details>
+    
 ---
 
 <div>
